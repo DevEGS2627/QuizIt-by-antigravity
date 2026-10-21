@@ -8,7 +8,7 @@ create extension if not exists "uuid-ossp";
 -- 2. QUIZ SETTINGS & RULES
 create table if not exists public.quiz_settings (
   id text primary key default 'arena_settings',
-  theme text not null default 'midnight-gold',
+  theme text not null default 'cyber-neon',
   correct_points integer not null default 10,
   wrong_points integer not null default 0,
   pounce_correct_points integer not null default 10,
@@ -115,27 +115,76 @@ alter table public.question_draws enable row level security;
 alter table public.score_events enable row level security;
 
 -- PUBLIC READ ACCESS (Allows unauthenticated audience / projector screens to view real-time state)
+drop policy if exists "Public viewers can read settings" on public.quiz_settings;
 create policy "Public viewers can read settings" on public.quiz_settings for select using (true);
+
+drop policy if exists "Public viewers can read teams" on public.teams;
 create policy "Public viewers can read teams" on public.teams for select using (true);
+
+drop policy if exists "Public viewers can read live state" on public.live_quiz_state;
 create policy "Public viewers can read live state" on public.live_quiz_state for select using (true);
+
+drop policy if exists "Public viewers can read score events" on public.score_events;
 create policy "Public viewers can read score events" on public.score_events for select using (true);
+
+drop policy if exists "Public viewers can read questions" on public.questions;
 create policy "Public viewers can read questions" on public.questions for select using (true);
 
 -- AUTHENTICATED ADMIN ACCESS (Allows only logged-in operators to mutate data)
+drop policy if exists "Admins can update settings" on public.quiz_settings;
 create policy "Admins can update settings" on public.quiz_settings for all using (auth.role() = 'authenticated');
+
+drop policy if exists "Admins can manage teams" on public.teams;
 create policy "Admins can manage teams" on public.teams for all using (auth.role() = 'authenticated');
+
+drop policy if exists "Admins can manage questions" on public.questions;
 create policy "Admins can manage questions" on public.questions for all using (auth.role() = 'authenticated');
+
+drop policy if exists "Admins can update live state" on public.live_quiz_state;
 create policy "Admins can update live state" on public.live_quiz_state for all using (auth.role() = 'authenticated');
+
+drop policy if exists "Admins can insert question draws" on public.question_draws;
 create policy "Admins can insert question draws" on public.question_draws for all using (auth.role() = 'authenticated');
+
+drop policy if exists "Admins can manage score events" on public.score_events;
 create policy "Admins can manage score events" on public.score_events for all using (auth.role() = 'authenticated');
 
 -- STORAGE POLICIES
+drop policy if exists "Public can view assets" on storage.objects;
 create policy "Public can view assets" on storage.objects for select using (bucket_id = 'quiz_assets');
-create policy "Admins can upload assets" on storage.objects for insert with check (bucket_id = 'quiz_assets' and auth.role() = 'authenticated');
-create policy "Admins can update assets" on storage.objects for update with check (bucket_id = 'quiz_assets' and auth.role() = 'authenticated');
-create policy "Admins can delete assets" on storage.objects for delete with check (bucket_id = 'quiz_assets' and auth.role() = 'authenticated');
 
--- ENABLE REALTIME REPLICATION FOR LIVE QUIZ STATE & TEAMS
-alter publication supabase_realtime add table public.live_quiz_state;
-alter publication supabase_realtime add table public.teams;
-alter publication supabase_realtime add table public.score_events;
+drop policy if exists "Admins can upload assets" on storage.objects;
+create policy "Admins can upload assets" on storage.objects for insert with check (bucket_id = 'quiz_assets' and auth.role() = 'authenticated');
+
+drop policy if exists "Admins can update assets" on storage.objects;
+create policy "Admins can update assets" on storage.objects for update using (bucket_id = 'quiz_assets' and auth.role() = 'authenticated') with check (bucket_id = 'quiz_assets' and auth.role() = 'authenticated');
+
+drop policy if exists "Admins can delete assets" on storage.objects;
+create policy "Admins can delete assets" on storage.objects for delete using (bucket_id = 'quiz_assets' and auth.role() = 'authenticated');
+
+-- ==============================================================================
+-- ENABLE REALTIME REPLICATION FOR LIVE QUIZ STATE & TEAMS (Safe re-run)
+-- ==============================================================================
+do $$
+begin
+  if not exists (
+    select 1 from pg_publication_tables 
+    where pubname = 'supabase_realtime' and schemaname = 'public' and tablename = 'live_quiz_state'
+  ) then
+    alter publication supabase_realtime add table public.live_quiz_state;
+  end if;
+
+  if not exists (
+    select 1 from pg_publication_tables 
+    where pubname = 'supabase_realtime' and schemaname = 'public' and tablename = 'teams'
+  ) then
+    alter publication supabase_realtime add table public.teams;
+  end if;
+
+  if not exists (
+    select 1 from pg_publication_tables 
+    where pubname = 'supabase_realtime' and schemaname = 'public' and tablename = 'score_events'
+  ) then
+    alter publication supabase_realtime add table public.score_events;
+  end if;
+end $$;
