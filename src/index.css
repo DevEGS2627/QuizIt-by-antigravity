@@ -1,0 +1,426 @@
+/* ==========================================================================
+   EGS Quizit! — Design System
+   Inspirations: Apple (Clarity & Glassmorphism), Airbnb (Friendly Affordance),
+                 IKEA (Honest Modular Functionalism), Lovable & Replit (Speed & Modern AI Tools)
+   ========================================================================== */
+
+:root {
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+  /* Apple & Airbnb refined shadows: layered, soft, physical */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-dock: 0 16px 48px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.08);
+
+  /* Apple continuous squircle curvature */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Apple Fluid Motion */
+  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --transition-fast: 0.18s var(--ease-apple);
+  --transition-normal: 0.28s var(--ease-apple);
+}
+
+/* ==========================================================================
+   THEME 0: Royal Gold & Midnight Obsidian (Flagship High-Contrast Theme)
+   ========================================================================== */
+/* ==========================================================================
+   THEME 1: Cyberpunk Neon (Flagship) - High-voltage Cyan & Electric Magenta
+   ========================================================================== */
+[data-theme="cyber-neon"],
+:root {
+  --bg-primary: #050711;            /* Void Matrix Obsidian */
+  --bg-secondary: #0b1124;          /* Deep Cyber Foundation */
+  --bg-surface: #101a36;            /* Luminous Cyber Cards */
+  --bg-surface-hover: #17244a;
+  --glass-surface: rgba(16, 26, 54, 0.85);
+  --glass-border: rgba(0, 245, 255, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(0, 245, 255, 0.7);
+
+  --text-primary: #ffffff;
+  --text-secondary: #e0f2fe;        /* Crisp Ice White */
+  --text-muted: #93c5fd;
+
+  --accent: #00f5ff;                /* High-Voltage Cyber Cyan */
+  --accent-hover: #38bdf8;
+  --accent-rgb: 0, 245, 255;
+  --accent-contrast: #030712;
+
+  --pounce-color: #ff007f;          /* Electric Neon Magenta */
+  --pounce-rgb: 255, 0, 127;
+  --success-color: #00ff9d;         /* Cyber Mint */
+  --danger-color: #ff1744;          /* Laser Red */
+  --warning-color: #ffb703;
+}
+
+/* ==========================================================================
+   THEME 2: Solar Flare / Crimson Inferno - Blazing Coral Red & Solar Gold
+   ========================================================================== */
+[data-theme="solar-flare"] {
+  --bg-primary: #0c0508;
+  --bg-secondary: #170b10;
+  --bg-surface: #241119;
+  --bg-surface-hover: #331824;
+  --glass-surface: rgba(36, 17, 25, 0.85);
+  --glass-border: rgba(255, 42, 95, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(255, 42, 95, 0.7);
+
+  --text-primary: #ffffff;
+  --text-secondary: #ffe4e6;
+  --text-muted: #f472b6;
+
+  --accent: #ff2a5f;                /* Radiant Coral Crimson */
+  --accent-hover: #ff5277;
+  --accent-rgb: 255, 42, 95;
+  --accent-contrast: #ffffff;
+
+  --pounce-color: #ffb703;          /* Solar Gold */
+  --pounce-rgb: 255, 183, 3;
+  --success-color: #10b981;
+  --danger-color: #ff2a5f;
+  --warning-color: #ffb703;
+}
+
+/* ==========================================================================
+   THEME 3: Aurora Borealis / Hyper Mint - Arctic Emerald & Ice Blue
+   ========================================================================== */
+[data-theme="aurora-mint"] {
+  --bg-primary: #030d12;
+  --bg-secondary: #071720;
+  --bg-surface: #0e2430;
+  --bg-surface-hover: #143242;
+  --glass-surface: rgba(14, 36, 48, 0.85);
+  --glass-border: rgba(0, 255, 157, 0.32);
+  --border-subtle: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(0, 255, 157, 0.65);
+
+  --text-primary: #ffffff;
+  --text-secondary: #e6fffa;
+  --text-muted: #81e6d9;
+
+  --accent: #00ff9d;                /* Hyper Neon Mint */
+  --accent-hover: #5cffb7;
+  --accent-rgb: 0, 255, 157;
+  --accent-contrast: #030d12;
+
+  --pounce-color: #00e5ff;          /* Ice Electric Blue */
+  --pounce-rgb: 0, 229, 255;
+  --success-color: #00ff9d;
+  --danger-color: #ff4757;
+  --warning-color: #ffd166;
+}
+
+/* ==========================================================================
+   THEME 4: Cosmic Amethyst / Neon Violet - Royal Galaxy Glow
+   ========================================================================== */
+[data-theme="cosmic-violet"] {
+  --bg-primary: #090416;
+  --bg-secondary: #13092b;
+  --bg-surface: #1e0e42;
+  --bg-surface-hover: #291459;
+  --glass-surface: rgba(30, 14, 66, 0.85);
+  --glass-border: rgba(192, 132, 252, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(192, 132, 252, 0.7);
+
+  --text-primary: #ffffff;
+  --text-secondary: #f3e8ff;
+  --text-muted: #d8b4fe;
+
+  --accent: #c084fc;                /* Luminescent Amethyst */
+  --accent-hover: #d8b4fe;
+  --accent-rgb: 192, 132, 252;
+  --accent-contrast: #090416;
+
+  --pounce-color: #f43f5e;          /* Neon Rose */
+  --pounce-rgb: 244, 63, 94;
+  --success-color: #34d399;
+  --danger-color: #f43f5e;
+  --warning-color: #fbbf24;
+}
+
+/* ==========================================================================
+   THEME 5: Electric Cobalt / Laser Stadium
+   ========================================================================== */
+[data-theme="electric-cobalt"] {
+  --bg-primary: #020716;
+  --bg-secondary: #06112e;
+  --bg-surface: #0c1c47;
+  --bg-surface-hover: #122863;
+  --glass-surface: rgba(12, 28, 71, 0.85);
+  --glass-border: rgba(56, 189, 248, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(56, 189, 248, 0.7);
+
+  --text-primary: #ffffff;
+  --text-secondary: #e0f2fe;
+  --text-muted: #93c5fd;
+
+  --accent: #38bdf8;                /* Laser Azure */
+  --accent-hover: #7dd3fc;
+  --accent-rgb: 56, 189, 248;
+  --accent-contrast: #020716;
+
+  --pounce-color: #3b82f6;
+  --pounce-rgb: 59, 130, 246;
+  --success-color: #10b981;
+  --danger-color: #ef4444;
+  --warning-color: #f59e0b;
+}
+
+/* ==========================================================================
+   THEME 6: Champagne Luxe / Grand Arena (Gold on Obsidian)
+   ========================================================================== */
+[data-theme="champagne-luxe"],
+[data-theme="royal-gold"] {
+  --bg-primary: #070709;
+  --bg-secondary: #121217;
+  --bg-surface: #1a1a22;
+  --bg-surface-hover: #242430;
+  --glass-surface: rgba(26, 26, 34, 0.85);
+  --glass-border: rgba(246, 211, 101, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(246, 211, 101, 0.7);
+
+  --text-primary: #ffffff;
+  --text-secondary: #fef3c7;
+  --text-muted: #d4d4d8;
+
+  --accent: #f6d365;                /* Pure 24K Champagne Gold */
+  --accent-hover: #ffe082;
+  --accent-rgb: 246, 211, 101;
+  --accent-contrast: #070709;
+
+  --pounce-color: #f59e0b;
+  --pounce-rgb: 245, 158, 11;
+  --success-color: #10b981;
+  --danger-color: #ef4444;
+  --warning-color: #f6d365;
+}
+
+/* ==========================================================================
+   THEME 7: Toxic Matrix / Radioactive Lime
+   ========================================================================== */
+[data-theme="toxic-matrix"],
+[data-theme="olive-moss"] {
+  --bg-primary: #040804;
+  --bg-secondary: #081408;
+  --bg-surface: #0e220e;
+  --bg-surface-hover: #153315;
+  --glass-surface: rgba(14, 34, 14, 0.85);
+  --glass-border: rgba(57, 255, 20, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(57, 255, 20, 0.7);
+
+  --text-primary: #ffffff;
+  --text-secondary: #dcfce7;
+  --text-muted: #86efac;
+
+  --accent: #39ff14;                /* Radioactive Neon Lime */
+  --accent-hover: #6fff52;
+  --accent-rgb: 57, 255, 20;
+  --accent-contrast: #040804;
+
+  --pounce-color: #00f0ff;
+  --pounce-rgb: 0, 240, 255;
+  --success-color: #39ff14;
+  --danger-color: #ff3838;
+  --warning-color: #fffa65;
+}
+
+/* ==========================================================================
+   THEME 8: Tokyo Sunset / Synthwave Horizon
+   ========================================================================== */
+[data-theme="synthwave-sunset"],
+[data-theme="warm-sienna"],
+[data-theme="nordic-terracotta"],
+[data-theme="twilight-slate"],
+[data-theme="linen-cognac"],
+[data-theme="minimal-sand"],
+[data-theme="dark-studio"] {
+  --bg-primary: #0f071e;
+  --bg-secondary: #1a0e33;
+  --bg-surface: #27154a;
+  --bg-surface-hover: #361d66;
+  --glass-surface: rgba(39, 21, 74, 0.85);
+  --glass-border: rgba(255, 107, 53, 0.35);
+  --border-subtle: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(255, 107, 53, 0.7);
+
+  --text-primary: #ffffff;
+  --text-secondary: #ffedd5;
+  --text-muted: #fdba74;
+
+  --accent: #ff6b35;                /* High-Voltage Tangerine */
+  --accent-hover: #ff8559;
+  --accent-rgb: 255, 107, 53;
+  --accent-contrast: #ffffff;
+
+  --pounce-color: #ff1361;          /* Neon Synthwave Pink */
+  --pounce-rgb: 255, 19, 97;
+  --success-color: #00f5ff;
+  --danger-color: #ff1361;
+  --warning-color: #ffb703;
+}
+
+/* ==========================================================================
+   Global Reset & Apple Typographic Precision
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(ellipse 85% 55% at 50% -10%, rgba(var(--accent-rgb), 0.14), transparent 70%),
+    radial-gradient(circle at 95% 95%, rgba(var(--accent-rgb), 0.07), transparent 45%),
+    radial-gradient(circle at 5% 50%, rgba(255, 255, 255, 0.02), transparent 40%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+/* Clean minimal scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Interactive Form Controls & Focus States */
+button {
+  font-family: inherit;
+  color: inherit;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  background-color: var(--bg-surface) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.2);
+  background-color: var(--bg-surface-hover) !important;
+  color: #ffffff !important;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* Badges */
+.tag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  background: rgba(var(--accent-rgb), 0.09);
+  color: var(--accent);
+  border: 1px solid var(--border-subtle);
+}
+
+.pounce-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(var(--pounce-rgb), 0.14);
+  color: var(--pounce-color);
+  border: 1px solid rgba(var(--pounce-rgb), 0.28);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Keyboard hint chips (Lovable/Replit style) */
+.kbd-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 5px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  color: var(--text-muted);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

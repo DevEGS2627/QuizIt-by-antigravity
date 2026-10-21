@@ -1,0 +1,13 @@
+{
+  "name": "egs-quizit-backend-server",
+  "version": "1.0.0",
+  "description": "Zero-dependency local REST & Realtime Event Backend for EGS Quizit!",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["quiz", "backend", "arena", "egs-quizit", "rest-api"],
+  "author": "EGS Arena Engineering",
+  "license": "ISC"
+}

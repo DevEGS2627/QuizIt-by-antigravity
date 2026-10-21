@@ -1,0 +1,10 @@
+Tag,Round,Question,Answer,Source,Media_URL
+R1-001,1,"Which international organization, founded in 1945 in San Francisco, currently has its headquarters in New York City?","The United Nations (UN)","UN Charter Archives",""
+R1-002,1,"What is the standard nautical unit of measurement equal to exactly 1,852 meters?","Nautical Mile","International Hydrographic Organization",""
+R2-001,2,"Discovered in 2012 at CERN, which fundamental boson gives mass to other elementary particles?","The Higgs Boson","CERN / Nature 2012",""
+R2-002,2,"Which molecular tool did Emmanuelle Charpentier and Jennifer Doudna develop into programmable molecular scissors?","CRISPR-Cas9","Nobel Prize in Chemistry 2020",""
+R3-001,3,"Which ancient legal code inscribed on a diorite stele around 1750 BCE contains 282 edicts famously known as 'an eye for an eye'?","Code of Hammurabi","Louvre Museum Archives",""
+R3-002,3,"In 1453, the fall of which Byzantine capital to Ottoman Sultan Mehmed II marked the end of the Middle Ages?","Constantinople (Istanbul)","Byzantine Historical Society",""
+R4-001,4,"Which monumental 1937 anti-war painting by Pablo Picasso depicts the bombing of a Basque town?","Guernica","Museo Reina Sofía",""
+R5-001,5,"In the modern Summer Olympic Games, what is the exact official distance of the marathon race?","42.195 kilometers","World Athletics",""
+R6-001,6,"Identify the chemical element whose symbol is derived from the Latin word 'Hydrargyrum', meaning liquid silver.","Mercury (Hg)","Royal Society of Chemistry",""

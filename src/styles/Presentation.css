@@ -1,0 +1,923 @@
+/* ==========================================================================
+   THEATRICAL AUDITORIUM PRESENTATION ARENA (70/30 Projector Viewport)
+   Cinematic Stage Spotlight, Grand EGS Crest Branding, Apple Vision Frosted
+   Glass Transparency, High Contrast Visibility, Dynamic Themes & Fluid Motion.
+   ========================================================================== */
+
+/* -------------------------------------------------------------
+   Dynamic Stage Color Themes (High-Contrast CSS Variables)
+   ------------------------------------------------------------- */
+.presentation-arena-container {
+  --stage-accent: #ffd700;
+  --stage-accent-rgb: 255, 215, 0;
+  --stage-glow-1: rgba(255, 215, 0, 0.22);
+  --stage-glow-2: rgba(245, 158, 11, 0.14);
+  --stage-bg-1: #030509;
+  --stage-bg-2: #000000;
+  --stage-border: rgba(255, 255, 255, 0.22);
+  --stage-card-bg: rgba(14, 20, 34, 0.68);
+  --stage-sidebar-bg: rgba(14, 20, 34, 0.72);
+
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  background: 
+    radial-gradient(circle at 40% 15%, var(--stage-glow-1) 0%, transparent 60%),
+    radial-gradient(circle at 85% 85%, var(--stage-glow-2) 0%, transparent 50%),
+    linear-gradient(180deg, var(--stage-bg-1) 0%, var(--stage-bg-2) 100%);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+  transition: background 0.35s ease;
+}
+
+/* 1. Cyberpunk Neon Theme (Electric Cyan & Neon Magenta) */
+.presentation-arena-container[data-stage-theme="cyber-neon"],
+.presentation-arena-container[data-stage-theme="cyber-cyan"] {
+  --stage-accent: #00f5ff;
+  --stage-accent-rgb: 0, 245, 255;
+  --stage-glow-1: rgba(0, 245, 255, 0.28);
+  --stage-glow-2: rgba(255, 0, 127, 0.18);
+  --stage-bg-1: #050711;
+  --stage-bg-2: #000000;
+  --stage-card-bg: rgba(16, 26, 54, 0.78);
+  --stage-sidebar-bg: rgba(16, 26, 54, 0.82);
+}
+
+/* 2. Solar Flare / Crimson Inferno Theme */
+.presentation-arena-container[data-stage-theme="solar-flare"],
+.presentation-arena-container[data-stage-theme="crimson-stadium"] {
+  --stage-accent: #ff2a5f;
+  --stage-accent-rgb: 255, 42, 95;
+  --stage-glow-1: rgba(255, 42, 95, 0.28);
+  --stage-glow-2: rgba(255, 183, 3, 0.2);
+  --stage-bg-1: #0c0508;
+  --stage-bg-2: #000000;
+  --stage-card-bg: rgba(36, 17, 25, 0.78);
+  --stage-sidebar-bg: rgba(36, 17, 25, 0.82);
+}
+
+/* 3. Aurora Borealis / Arctic Mint Theme */
+.presentation-arena-container[data-stage-theme="aurora-mint"],
+.presentation-arena-container[data-stage-theme="laser-emerald"] {
+  --stage-accent: #00ff9d;
+  --stage-accent-rgb: 0, 255, 157;
+  --stage-glow-1: rgba(0, 255, 157, 0.28);
+  --stage-glow-2: rgba(0, 229, 255, 0.18);
+  --stage-bg-1: #030d12;
+  --stage-bg-2: #000000;
+  --stage-card-bg: rgba(14, 36, 48, 0.78);
+  --stage-sidebar-bg: rgba(14, 36, 48, 0.82);
+}
+
+/* 4. Cosmic Amethyst / Neon Violet Theme */
+.presentation-arena-container[data-stage-theme="cosmic-violet"],
+.presentation-arena-container[data-stage-theme="electric-violet"] {
+  --stage-accent: #c084fc;
+  --stage-accent-rgb: 192, 132, 252;
+  --stage-glow-1: rgba(192, 132, 252, 0.28);
+  --stage-glow-2: rgba(244, 63, 94, 0.18);
+  --stage-bg-1: #090416;
+  --stage-bg-2: #000000;
+  --stage-card-bg: rgba(30, 14, 66, 0.78);
+  --stage-sidebar-bg: rgba(30, 14, 66, 0.82);
+}
+
+/* 5. Electric Cobalt / Laser Stadium Theme */
+.presentation-arena-container[data-stage-theme="electric-cobalt"] {
+  --stage-accent: #38bdf8;
+  --stage-accent-rgb: 56, 189, 248;
+  --stage-glow-1: rgba(56, 189, 248, 0.28);
+  --stage-glow-2: rgba(37, 99, 235, 0.2);
+  --stage-bg-1: #020716;
+  --stage-bg-2: #000000;
+  --stage-card-bg: rgba(12, 28, 71, 0.78);
+  --stage-sidebar-bg: rgba(12, 28, 71, 0.82);
+}
+
+/* 6. Champagne Luxe / Black Diamond Theme */
+.presentation-arena-container[data-stage-theme="champagne-luxe"],
+.presentation-arena-container[data-stage-theme="royal-gold"] {
+  --stage-accent: #f6d365;
+  --stage-accent-rgb: 246, 211, 101;
+  --stage-glow-1: rgba(246, 211, 101, 0.28);
+  --stage-glow-2: rgba(245, 158, 11, 0.18);
+  --stage-bg-1: #070709;
+  --stage-bg-2: #000000;
+  --stage-card-bg: rgba(26, 26, 34, 0.78);
+  --stage-sidebar-bg: rgba(26, 26, 34, 0.82);
+}
+
+/* 7. Toxic Matrix / Radioactive Lime Theme */
+.presentation-arena-container[data-stage-theme="toxic-matrix"] {
+  --stage-accent: #39ff14;
+  --stage-accent-rgb: 57, 255, 20;
+  --stage-glow-1: rgba(57, 255, 20, 0.28);
+  --stage-glow-2: rgba(0, 240, 255, 0.18);
+  --stage-bg-1: #040804;
+  --stage-bg-2: #000000;
+  --stage-card-bg: rgba(14, 34, 14, 0.78);
+  --stage-sidebar-bg: rgba(14, 34, 14, 0.82);
+}
+
+/* 8. Tokyo Sunset / Synthwave Horizon Theme */
+.presentation-arena-container[data-stage-theme="synthwave-sunset"] {
+  --stage-accent: #ff6b35;
+  --stage-accent-rgb: 255, 107, 53;
+  --stage-glow-1: rgba(255, 107, 53, 0.28);
+  --stage-glow-2: rgba(255, 19, 97, 0.2);
+  --stage-bg-1: #0f071e;
+  --stage-bg-2: #000000;
+  --stage-card-bg: rgba(39, 21, 74, 0.78);
+  --stage-sidebar-bg: rgba(39, 21, 74, 0.82);
+}
+
+.presentation-main-layout {
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+  width: 100%;
+  height: 100%;
+  padding: 12px 18px 8px;
+  gap: 16px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   LEFT COLUMN: 70% Active Stage
+   ========================================================================== */
+.presentation-stage-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 10px;
+  overflow: visible; /* CRUCIAL: Allow header dropdowns to extend outside without clipping */
+  position: relative;
+  z-index: 100;
+  min-height: 0;
+}
+
+/* -------------------------------------------------------------
+   Theatrical Auditorium Projector Header (Apple Frosted Glass)
+   ------------------------------------------------------------- */
+.projector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background: var(--stage-card-bg);
+  backdrop-filter: blur(36px) saturate(210%);
+  -webkit-backdrop-filter: blur(36px) saturate(210%);
+  border-radius: 14px;
+  border: 1px solid var(--stage-border);
+  box-shadow: 
+    0 12px 36px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  position: relative;
+  z-index: 1000; /* Stacks above question stage card */
+  overflow: visible;
+}
+
+.brand-stage-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* EGS Official Crest in Projector Header */
+.projector-crest-badge {
+  height: 38px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 3px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 18px var(--stage-glow-1);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: transform 0.2s ease;
+}
+
+.projector-crest-badge:hover {
+  transform: scale(1.04);
+}
+
+.projector-crest-img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.projector-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.projector-school-title {
+  font-family: var(--font-display, inherit);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+}
+
+.projector-arena-sub {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--stage-accent);
+  text-shadow: 0 0 12px var(--stage-glow-1);
+}
+
+/* Live Broadcast Pill */
+.stage-live-broadcast-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: rgba(239, 68, 68, 0.22);
+  border: 1px solid rgba(239, 68, 68, 0.55);
+  color: #fee2e2;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.live-broadcast-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 10px #ef4444;
+  animation: broadcastDotPulse 1.4s infinite;
+}
+
+@keyframes broadcastDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.4); }
+}
+
+.round-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.round-num {
+  color: var(--stage-accent);
+  font-weight: 800;
+}
+
+.round-sep {
+  opacity: 0.4;
+}
+
+.round-name-txt {
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.projector-chit-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: rgba(var(--stage-accent-rgb), 0.18);
+  border: 1px solid var(--stage-accent);
+  color: var(--stage-accent);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 800;
+  box-shadow: 0 0 12px var(--stage-glow-1);
+}
+
+.projector-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 1001;
+  overflow: visible;
+}
+
+/* -------------------------------------------------------------
+   Apple-Style Stage Theme Swatches Bar in Header
+   ------------------------------------------------------------- */
+.header-color-swatches-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 3px 6px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.header-swatch-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #cbd5e1;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.header-swatch-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.header-swatch-btn.active {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  box-shadow: 0 0 12px var(--stage-glow-1);
+}
+
+.swatch-color-core {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  box-shadow: 0 0 6px currentColor;
+  flex-shrink: 0;
+}
+
+.swatch-label-short {
+  line-height: 1;
+}
+
+.btn-icon-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #e2e8f0;
+  padding: 7px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.btn-icon-ghost:hover,
+.btn-icon-ghost.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-color: var(--stage-accent);
+  box-shadow: 0 0 14px var(--stage-glow-1);
+}
+
+/* -------------------------------------------------------------
+   Operator "More" Menu Dropdown (Guaranteed on Top)
+   ------------------------------------------------------------- */
+.more-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #0f1626;
+  backdrop-filter: blur(36px);
+  -webkit-backdrop-filter: blur(36px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  min-width: 250px;
+  z-index: 99999 !important; /* CRUCIAL: Highest z-index */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-header {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #94a3b8;
+  padding: 4px 8px;
+  letter-spacing: 0.08em;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: all 0.15s;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--stage-accent);
+}
+
+.menu-item.active {
+  background: rgba(var(--stage-accent-rgb), 0.2);
+  color: var(--stage-accent);
+  border: 1px solid rgba(var(--stage-accent-rgb), 0.4);
+}
+
+.theme-color-bullet {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.theme-name-txt {
+  flex: 1;
+}
+
+.theme-active-icon {
+  color: var(--stage-accent);
+}
+
+.menu-item.exit-btn {
+  color: #f87171;
+}
+.menu-item.exit-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.menu-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.14);
+  margin: 4px 0;
+}
+
+.menu-label {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  padding: 2px 8px;
+  font-weight: 700;
+}
+
+.menu-theme-chips-row {
+  display: flex;
+  gap: 6px;
+  padding: 4px 8px;
+}
+
+.theme-chip-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  padding: 0;
+}
+
+.theme-chip-btn:hover {
+  transform: scale(1.15);
+}
+
+.theme-chip-btn.active {
+  border-color: #ffffff !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.chip-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.menu-rounds-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  padding: 2px 6px;
+}
+
+.menu-round-btn {
+  padding: 6px 2px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e2e8f0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.menu-round-btn.active {
+  background: var(--stage-accent);
+  color: #000000;
+  border-color: var(--stage-accent);
+  box-shadow: 0 0 10px var(--stage-glow-1);
+}
+
+/* ==========================================================================
+   Question Stage Card (Apple Frosted Glass Transparency & Specular Highlight)
+   ========================================================================== */
+.stage-card-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.question-stage-card.is-projector {
+  background: var(--stage-card-bg);
+  backdrop-filter: blur(36px) saturate(210%);
+  -webkit-backdrop-filter: blur(36px) saturate(210%);
+  border: 1px solid var(--stage-border);
+  border-radius: 18px;
+  padding: 26px 34px;
+  box-shadow: 
+    0 28px 70px rgba(0, 0, 0, 0.7),
+    0 0 50px var(--stage-glow-1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.question-stage-card.is-projector::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.question-stage-empty.is-projector {
+  background: var(--stage-card-bg);
+  backdrop-filter: blur(28px);
+  border: 1px dashed rgba(255, 255, 255, 0.22);
+  border-radius: 18px;
+  padding: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+}
+
+.question-stage-empty.is-projector .empty-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 12px 0 6px;
+}
+
+.question-stage-empty.is-projector .empty-sub-tag {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  background: rgba(var(--stage-accent-rgb), 0.2);
+  color: var(--stage-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--stage-accent);
+}
+
+/* Projector Bottom Operator Bar */
+.projector-bottom-operator-bar {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.projector-bottom-operator-bar .floating-capsule-bar {
+  background: rgba(14, 20, 34, 0.82);
+  backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  padding: 6px 16px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+  max-width: 580px;
+}
+
+.presentation-paddles-wrap {
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: 30% Live Standings Sidebar (High Contrast Podium)
+   ========================================================================== */
+.presentation-sidebar-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--stage-sidebar-bg);
+  backdrop-filter: blur(36px) saturate(210%);
+  -webkit-backdrop-filter: blur(36px) saturate(210%);
+  border: 1px solid var(--stage-border);
+  border-radius: 18px;
+  padding: 14px 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  transition: all 0.3s ease;
+}
+
+.standings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  margin-bottom: 8px;
+}
+
+.standings-heading {
+  font-size: 0.98rem;
+  letter-spacing: 0.06em;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.standings-round-chip {
+  padding: 4px 10px;
+  background: rgba(var(--stage-accent-rgb), 0.22);
+  color: var(--stage-accent);
+  border: 1px solid var(--stage-accent);
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 0 0 10px var(--stage-glow-1);
+}
+
+/* Guaranteed 6 Teams Fit with Zero Vertical Scrolling */
+.projector-teams-list {
+  flex: 1;
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  gap: 7px;
+  min-height: 0;
+}
+
+/* High-contrast auditorium styling for projector sidebar cards */
+.presentation-sidebar-col .team-card {
+  background: rgba(18, 26, 44, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.presentation-sidebar-col .team-card:hover {
+  background: rgba(28, 40, 68, 0.95);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 1st Place Gold Crown */
+.presentation-sidebar-col .team-card.is-first-place {
+  border: 2px solid #ffd700;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.22) 0%, rgba(18, 26, 44, 0.92) 100%);
+  box-shadow: 0 0 24px rgba(255, 215, 0, 0.45);
+}
+
+.presentation-sidebar-col .team-name {
+  color: #ffffff !important;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.presentation-sidebar-col .score-val {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.presentation-sidebar-col .score-val.highlight {
+  color: #ffd700 !important;
+  font-size: 1.35rem;
+  font-weight: 900;
+  text-shadow: 0 0 16px rgba(255, 215, 0, 0.65);
+}
+
+/* Answering Active Team Breathing Halo on Projector */
+.presentation-sidebar-col .team-card.is-active-team {
+  border-color: var(--team-accent, var(--stage-accent));
+  background: linear-gradient(135deg, rgba(var(--stage-accent-rgb), 0.25) 0%, rgba(18, 26, 44, 0.95) 100%);
+  box-shadow: 
+    0 0 0 2.5px var(--team-accent, var(--stage-accent)),
+    0 0 30px var(--stage-glow-1);
+}
+
+/* Typography Scaling for Giant Auditorium Projectors */
+.stage-question-content.projector-font-large {
+  font-size: 2.2rem;
+  line-height: 1.38;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.stage-question-content.projector-font-medium {
+  font-size: 1.8rem;
+  line-height: 1.42;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.stage-question-content.projector-font-compact {
+  font-size: 1.45rem;
+  line-height: 1.46;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Official Answer Key Box (Apple Frosted Glass) */
+.stage-answer-box {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(5, 150, 105, 0.32) 100%);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1.5px solid rgba(16, 185, 129, 0.6);
+  border-radius: 14px;
+  padding: 16px 20px;
+  box-shadow: 0 12px 36px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  animation: answerBoxFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes answerBoxFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.answer-header-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #34d399;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.answer-text {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #ffd700;
+}
+
+/* -------------------------------------------------------------
+   Continuous Ambient Particles in Presentation Mode
+   ------------------------------------------------------------- */
+.presentation-arena-container .ambient-particles-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.75;
+}
+
+/* -------------------------------------------------------------
+   Tag Spotlight Lock-In Card (Pre-Sand Reveal Phase)
+   ------------------------------------------------------------- */
+.tag-spotlight-lockin-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  min-height: 110px;
+  animation: tagSpotlightPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes tagSpotlightPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.tag-lockin-subtitle {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--stage-accent, #ffd700);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.tag-lockin-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 24px;
+  border-radius: 9999px;
+  background: rgba(var(--stage-accent-rgb, 255, 215, 0), 0.16);
+  border: 1.5px solid var(--stage-accent, #ffd700);
+  box-shadow: 0 0 35px var(--stage-glow-1, rgba(255, 215, 0, 0.35));
+}
+
+.tag-hash-txt {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.tag-code-txt {
+  font-family: var(--font-mono, monospace);
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 16px var(--stage-glow-1);
+}
+
+.tag-wind-incoming-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.incoming-sand-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+  animation: incomingDotPulse 1.2s infinite;
+}
+
+@keyframes incomingDotPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+
+@media (max-height: 800px) {
+  .presentation-main-layout {
+    padding: 8px 12px 4px;
+    gap: 10px;
+  }
+  .stage-question-content.projector-font-large {
+    font-size: 1.75rem;
+  }
+  .stage-question-content.projector-font-medium {
+    font-size: 1.48rem;
+  }
+  .stage-question-content.projector-font-compact {
+    font-size: 1.25rem;
+  }
+  .projector-header {
+    padding: 6px 12px;
+  }
+  .projector-crest-badge {
+    height: 32px;
+  }
+}
+
