@@ -12,6 +12,7 @@ import {
   Check
 } from 'lucide-react';
 import { APP_THEMES } from '../constants/initialData';
+import egsLogo from '../assets/egs-logo.png';
 
 export const Navbar = ({
   activeView,
@@ -69,9 +70,15 @@ export const Navbar = ({
         >
           <div className="egs-nav-crest-wrap">
             <img
-              src="/egs-logo.png"
+              src={egsLogo}
               alt="The Espee Global School Logo"
               className="egs-nav-logo-img"
+              onError={(e) => {
+                const fallbackUrl = `${import.meta.env.BASE_URL}egs-logo.png`;
+                if (e.currentTarget.src !== fallbackUrl) {
+                  e.currentTarget.src = fallbackUrl;
+                }
+              }}
             />
           </div>
           <div className="egs-brand-text-block">

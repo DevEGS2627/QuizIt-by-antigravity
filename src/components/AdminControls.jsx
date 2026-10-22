@@ -25,6 +25,7 @@ import {
 import { csvService } from '../services/csvService';
 import { supabaseService } from '../services/supabaseClient';
 import { THEMES_LIST } from '../constants/initialData';
+import egsLogo from '../assets/egs-logo.png';
 
 export const AdminControls = ({
   isAuthenticated,
@@ -96,7 +97,17 @@ export const AdminControls = ({
         <div className="admin-login-card">
           <div className="login-card-header">
             <div className="admin-egs-crest-badge" title="The Espee Global School, Roorkee">
-              <img src="/egs-logo.png" alt="The Espee Global School Logo" className="admin-crest-img" />
+              <img
+                src={egsLogo}
+                alt="The Espee Global School Logo"
+                className="admin-crest-img"
+                onError={(e) => {
+                  const fallbackUrl = `${import.meta.env.BASE_URL}egs-logo.png`;
+                  if (e.currentTarget.src !== fallbackUrl) {
+                    e.currentTarget.src = fallbackUrl;
+                  }
+                }}
+              />
             </div>
             <h2>Judge & Operator Authorization</h2>
             <p>The Espee Global School, Roorkee • Inter-School Quizit Championship</p>
@@ -231,7 +242,17 @@ export const AdminControls = ({
       <header className="admin-top-bar">
         <div className="admin-header-title">
           <div className="admin-header-crest-pill" title="The Espee Global School, Roorkee">
-            <img src="/egs-logo.png" alt="EGS Logo" className="admin-header-crest-img" />
+            <img
+              src={egsLogo}
+              alt="EGS Logo"
+              className="admin-header-crest-img"
+              onError={(e) => {
+                const fallbackUrl = `${import.meta.env.BASE_URL}egs-logo.png`;
+                if (e.currentTarget.src !== fallbackUrl) {
+                  e.currentTarget.src = fallbackUrl;
+                }
+              }}
+            />
           </div>
           <div>
             <h2>Admin & Judge Control Center</h2>

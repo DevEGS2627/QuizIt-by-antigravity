@@ -13,6 +13,7 @@ import { TeamCard } from './TeamCard';
 import { ScorePaddles } from './ScorePaddles';
 import { ChitAndDrawBar } from './ChitAndDrawBar';
 import { AmbientParticles } from './AmbientParticles';
+import egsLogo from '../assets/egs-logo.png';
 
 export const STAGE_THEMES = [
   { id: 'cyber-neon', name: '⚡ Cyberpunk Neon', preview: '#00f5ff', accent: '#ff007f' },
@@ -127,9 +128,15 @@ export const PresentationMode = ({
             <div className="brand-stage-left">
               <div className="projector-crest-badge" title="The Espee Global School, Roorkee">
                 <img
-                  src="/egs-logo.png"
+                  src={egsLogo}
                   alt="The Espee Global School Logo"
                   className="projector-crest-img"
+                  onError={(e) => {
+                    const fallbackUrl = `${import.meta.env.BASE_URL}egs-logo.png`;
+                    if (e.currentTarget.src !== fallbackUrl) {
+                      e.currentTarget.src = fallbackUrl;
+                    }
+                  }}
                 />
               </div>
               <div className="projector-brand-text">
